@@ -70,7 +70,7 @@ class TrainerController:
         self.learning_rate = initial_learning_rate
         
         # Optimizer
-        self.optimizer = tf.keras.optimizers.Adam(lr=self.learning_rate)
+        self.optimizer = tf.keras.optimizers.Adam(learning_rate=self.learning_rate)
         
         # Compile model so we can save the optimizer weights
         # self.model.compile(loss=self.loss_function, optimizer=self.optimizer)
@@ -271,7 +271,7 @@ class TrainerController:
         """
         # ----- Run the training -----
         print("==================== TRAINING =================")
-        print(f'Learning rate {self.optimizer.lr.numpy():.7f}')
+        print(f'Learning rate {self.optimizer.learning_rate.numpy():.7f}')
         print(f"Start training at {time.ctime()} - {self.unique_model_name}\n")
         start_time = time.time()
         
@@ -310,7 +310,7 @@ class TrainerController:
                 # TODO: handle formatting here
                 loss_values.append(f'{value.result():.5f}')
             loss_str = ','.join(loss_values)
-            log_line = f"{epoch+1},{loss_str},{self.optimizer.lr.numpy():.6f},{time.time()-start_loop:.1f}"
+            log_line = f"{epoch+1},{loss_str},{self.optimizer.learning_rate.numpy():.6f},{time.time()-start_loop:.1f}"
             
 
             self._update_summary_logging(epoch)
@@ -361,8 +361,9 @@ class TrainerController:
         self.model.save(f'{self.model_path}-best.h5')
         
         # Save optimizer weights.
+
+        print(self.optimizer.__dict__)
         symbolic_weights = getattr(self.optimizer)
-        print(symbolic_weights)
         #symbolic_weights = getattr(self.optimizer, 'weights')
         if symbolic_weights:
             weight_values = tf.keras.backend.batch_get_value(symbolic_weights)
@@ -410,7 +411,7 @@ class TrainerController:
         
         # Summary writer
         with self.train_writer.as_default():
-            tf.summary.scalar(f"{self.network_name}/learning_rate", self.optimizer.lr, step=epoch)
+            tf.summary.scalar(f"{self.network_name}/learning_rate", self.optimizer.learning_rate, step=epoch)
             for key in train_metrics.keys():
                 tf.summary.scalar(f"{self.network_name}/{key}",  train_metrics[key].result(), step=epoch)         
         
