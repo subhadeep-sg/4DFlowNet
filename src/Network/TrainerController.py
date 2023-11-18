@@ -362,9 +362,9 @@ class TrainerController:
         
         # Save optimizer weights.
 
-        print(dir(self.optimizer))
-        symbolic_weights = getattr(self.optimizer)
-        #symbolic_weights = getattr(self.optimizer, 'weights')
+        # print(dir(self.optimizer))
+        symbolic_weights = self.optimizer.get_weights()
+        # symbolic_weights = getattr(self.optimizer, 'weights')
         if symbolic_weights:
             weight_values = tf.keras.backend.batch_get_value(symbolic_weights)
             with open(f'{self.model_dir}/optimizer.pkl', 'wb') as f:
