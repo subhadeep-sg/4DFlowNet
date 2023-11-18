@@ -201,12 +201,14 @@ class TrainerController:
             files = os.listdir(directory)
             for fname in files:
                 if fname.endswith(".py") or fname.endswith(".ipynb"):
-                    dest_fpath = os.path.join(self.model_dir,"backup_source",directory, fname)
-                    os.makedirs(os.path.dirname(dest_fpath), exist_ok=True)
-                    if directory == "/content/4DFlowNet/src/Network":
-                        shutil.copy2(f"Network/{fname}", dest_fpath)
+                    if directory == '/content/4DFlowNet/src/Network':
+                        dest_fpath = os.path.join(self.model_dir, "backup_source", 'Network', fname)
                     else:
-                        shutil.copy2(f"{directory}/{fname}", dest_fpath)
+                        dest_fpath = os.path.join(self.model_dir, "backup_source", directory, fname)
+                    
+                    os.makedirs(os.path.dirname(dest_fpath), exist_ok=True)
+
+                    shutil.copy2(f"{directory}/{fname}", dest_fpath)
 
       
     @tf.function
