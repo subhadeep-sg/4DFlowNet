@@ -362,7 +362,7 @@ class TrainerController:
         
         # Save optimizer weights.
 
-        # print(dir(self.optimizer))
+        print(dir(self.optimizer))
         symbolic_weights = self.optimizer.get_weights()
         # symbolic_weights = getattr(self.optimizer, 'weights')
         if symbolic_weights:
