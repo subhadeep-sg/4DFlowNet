@@ -195,7 +195,7 @@ class TrainerController:
 
         print("Copying source code to model directory...")
         # Copy all the source file to the model dir for backup
-        directory_to_backup = [".", "Network"]
+        directory_to_backup = [".", "/content/4DFlowNet/src/Network"]
         for directory in directory_to_backup:
             files = os.listdir(directory)
             for fname in files:
