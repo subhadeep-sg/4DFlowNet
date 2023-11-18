@@ -205,7 +205,7 @@ class TrainerController:
                         dest_fpath = os.path.join(self.model_dir, "backup_source", 'Network', fname)
                     else:
                         dest_fpath = os.path.join(self.model_dir, "backup_source", directory, fname)
-                    
+
                     os.makedirs(os.path.dirname(dest_fpath), exist_ok=True)
 
                     shutil.copy2(f"{directory}/{fname}", dest_fpath)
@@ -267,7 +267,7 @@ class TrainerController:
 
     def train_network(self, trainset, valset, n_epoch, testset=None):
         """
-            Main training function. Receives trainining and validation TF dataset.
+            Main training function. Receives training and validation TF dataset.
         """
         # ----- Run the training -----
         print("==================== TRAINING =================")
@@ -361,7 +361,9 @@ class TrainerController:
         self.model.save(f'{self.model_path}-best.h5')
         
         # Save optimizer weights.
-        symbolic_weights = getattr(self.optimizer, 'weights')
+        symbolic_weights = getattr(self.optimizer)
+        print(symbolic_weights)
+        #symbolic_weights = getattr(self.optimizer, 'weights')
         if symbolic_weights:
             weight_values = tf.keras.backend.batch_get_value(symbolic_weights)
             with open(f'{self.model_dir}/optimizer.pkl', 'wb') as f:
@@ -372,7 +374,7 @@ class TrainerController:
             Restore model weights and optimizer weights for uncompiled model
             Based on: https://stackoverflow.com/questions/49503748/save-and-load-model-optimizer-state
 
-            For an uncompiled model, we cannot just set the optmizer weights directly because they are zero.
+            For an uncompiled model, we cannot just set the optimizer weights directly because they are zero.
             We need to at least do an apply_gradients once and then set the optimizer weights.
         """
         # Set the path for the weights and optimizer
