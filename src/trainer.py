@@ -10,7 +10,7 @@ def load_indexes(index_file):
     return indexes
 
 if __name__ == "__main__":
-    data_dir = '../data'
+    data_dir = 'C:/DATA/UGA Sem 3/Thesis Topic Prep/Thesis/Code/4DFlowNet/data'
     
     # ---- Patch index files ----
     training_file = '{}/train.csv'.format(data_dir)
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     # Hyperparameters optimisation variables
     initial_learning_rate = 2e-4
-    epochs =  60
+    epochs =  3
     batch_size = 20
     mask_threshold = 0.6
 

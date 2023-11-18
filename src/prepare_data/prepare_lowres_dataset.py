@@ -15,7 +15,7 @@ def choose_venc():
 
 if __name__ == '__main__':
     # Config
-    base_path = '../../data'
+    base_path = 'c:/DATA/UGA Sem 3/Thesis Topic Prep/Thesis/Code/4DFlowNet/data'
     # Put your path to Hires Dataset
     input_filepath  = f'{base_path}/example_data_HR.h5'
     output_filename = f'{base_path}/example_data_LR.h5'
