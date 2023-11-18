@@ -21,7 +21,7 @@ class TrainerController:
             Setup all the placeholders, network graph, loss functions and optimizer here.
         """
         self.div_weight = 0 # Weighting for divergence loss
-        self.non_fluid_weight = 1 # Weigthing for non fluid region
+        self.non_fluid_weight = 1 # Weighting for non fluid region
 
         # General param
         self.res_increase = res_increase
@@ -32,7 +32,7 @@ class TrainerController:
         # Network
         self.network_name = network_name
 
-        input_shape = (patch_size,patch_size,patch_size,1)
+        input_shape = (patch_size, patch_size, patch_size, 1)
 
         # Prepare Input 
         u = tf.keras.layers.Input(shape=input_shape, name='u')
@@ -362,7 +362,7 @@ class TrainerController:
         
         # Save optimizer weights.
 
-        print(self.optimizer.__dict__)
+        print(dir(self.optimizer))
         symbolic_weights = getattr(self.optimizer)
         #symbolic_weights = getattr(self.optimizer, 'weights')
         if symbolic_weights:
