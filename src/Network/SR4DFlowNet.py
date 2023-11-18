@@ -76,7 +76,7 @@ def upsample3d(input_tensor, res_increase):
     # resize y-z
     squeeze_b_x = tf.reshape(input_tensor, [-1, y_size, z_size, c_size], name='reshape_bx')
     # resize_b_x = tf.compat.v1.image.resize_bilinear(squeeze_b_x, [y_size_new, z_size_new], align_corners=align)
-    resize_b_x = tf.image.resize(squeeze_b_x, [y_size_new, z_size_new], align_corners=align, method=ResizeMethod.BILINEAR)
+    resize_b_x = tf.image.resize(squeeze_b_x, [y_size_new, z_size_new], align_corners=align, method='bilinear')
     resume_b_x = tf.reshape(resize_b_x, [-1, x_size, y_size_new, z_size_new, c_size], name='resume_bx')
 
     # Reorient
@@ -85,7 +85,7 @@ def upsample3d(input_tensor, res_increase):
     #   squeeze and 2d resize
     squeeze_b_z = tf.reshape(reoriented, [-1, y_size_new, x_size, c_size], name='reshape_bz')
     # resize_b_z = tf.compat.v1.image.resize_bilinear(squeeze_b_z, [y_size_new, x_size_new], align_corners=align)
-    resize_b_z = tf.image.resize(squeeze_b_z, [y_size_new, x_size_new], align_corners=align, method=ResizeMethod.BILINEAR)
+    resize_b_z = tf.image.resize(squeeze_b_z, [y_size_new, x_size_new], align_corners=align, method='bilinear')
     resume_b_z = tf.reshape(resize_b_z, [-1, z_size_new, y_size_new, x_size_new, c_size], name='resume_bz')
     
     output_tensor = tf.transpose(resume_b_z, [0, 3, 2, 1, 4])
