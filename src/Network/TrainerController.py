@@ -163,7 +163,8 @@ class TrainerController:
         timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M")
         self.unique_model_name = f'{self.network_name}_{timestamp}'
 
-        self.model_dir = f"../models/{self.unique_model_name}"
+        # self.model_dir = f"../models/{self.unique_model_name}"
+        self.model_dir = f"/content/4DFlowNet/models/{self.unique_model_name}"
         # Do not use .ckpt on the model_path
         self.model_path = f"{self.model_dir}/{self.network_name}"
 
@@ -195,7 +196,7 @@ class TrainerController:
 
         print("Copying source code to model directory...")
         # Copy all the source file to the model dir for backup
-        directory_to_backup = [".", "/content/4DFlowNet/src/Network"]
+        directory_to_backup = [".", "/content/4DFlowNet/models/Network"]
         for directory in directory_to_backup:
             files = os.listdir(directory)
             for fname in files:
