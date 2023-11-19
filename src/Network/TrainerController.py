@@ -366,7 +366,8 @@ class TrainerController:
         symbolic_weights = self.optimizer.get_config()
         # symbolic_weights = getattr(self.optimizer, 'weights')
         if symbolic_weights:
-            weight_values = tf.keras.backend.batch_get_value(symbolic_weights)
+            # weight_values = tf.keras.backend.batch_get_value(symbolic_weights)
+            weight_values = symbolic_weights
             with open(f'{self.model_dir}/optimizer.pkl', 'wb') as f:
                 pickle.dump(weight_values, f)
 
@@ -385,18 +386,21 @@ class TrainerController:
         # Load the optimizer weights
         with open(opt_path, 'rb') as f:
             opt_weights = pickle.load(f)
+
+        # Loading configs instead of trainable weights
+        self.optimizer.from_config(opt_weights)
         
-        # Get the model's trainable weights
-        grad_vars = self.model.trainable_weights
-        # This need not be model.trainable_weights; it must be a correctly-ordered list of 
-        # grad_vars corresponding to how you usually call the optimizer.
-        zero_grads = [tf.zeros_like(w) for w in grad_vars]
-
-        # Apply gradients which don't do nothing with Adam
-        self.optimizer.apply_gradients(zip(zero_grads, grad_vars))
-
-        # Set the weights of the optimizer
-        self.optimizer.set_weights(opt_weights)
+        # # Get the model's trainable weights
+        # grad_vars = self.model.trainable_weights
+        # # This need not be model.trainable_weights; it must be a correctly-ordered list of
+        # # grad_vars corresponding to how you usually call the optimizer.
+        # zero_grads = [tf.zeros_like(w) for w in grad_vars]
+        #
+        # # Apply gradients which don't do nothing with Adam
+        # self.optimizer.apply_gradients(zip(zero_grads, grad_vars))
+        #
+        # # Set the weights of the optimizer
+        # self.optimizer.set_weights(opt_weights)
 
         # NOW set the trainable weights of the model
         self.model.load_weights(model_weights_path)
