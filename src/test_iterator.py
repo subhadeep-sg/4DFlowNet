@@ -12,7 +12,7 @@ def load_indexes(index_file):
     return indexes
 
 if __name__ == "__main__":
-    data_dir = '../data'
+    data_dir = '/content/4DFlowNet/data'
     
     # ---- Patch index files ----
     training_file = '{}/train.csv'.format(data_dir)

@@ -29,13 +29,13 @@ def prepare_network(patch_size, res_increase, low_resblock, hi_resblock):
     return model
 
 if __name__ == '__main__':
-    data_dir = '../data'
-    filename = 'example_data.h5'
+    data_dir = '/content/4DFlowNet/data'
+    filename = 'main_data.h5'
  
-    output_dir = "../result"
-    output_filename = 'example_result.h5'
+    output_dir = "/content/4DFlowNet/result"
+    output_filename = 'main_result.h5'
     
-    model_path = "../models/4DFlowNet/4DFlowNet.h5"
+    model_path = "/content/4DFlowNet/models/4DFlowNet_20231119-1200/4DFlowNet-best.h5"
     # Params
     patch_size = 24
     res_increase = 2
