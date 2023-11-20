@@ -160,7 +160,8 @@ class TrainerController:
             Create model directory to save the weights with a [network_name]_[datetime] format
             Also prepare logfile and tensorboard summary within the directory.
         """
-        timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M")
+        # timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M")
+        timestamp = 0
         self.unique_model_name = f'{self.network_name}_{timestamp}'
 
         # self.model_dir = f"../models/{self.unique_model_name}"

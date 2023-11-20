@@ -21,7 +21,7 @@ if __name__ == "__main__":
     
     restore = False
     if restore:
-        model_dir = "../models/4DFlowNet"
+        model_dir = "/content/4DFlowNet/models/4DFlowNet"
         model_file = "4DFlowNet-best.h5"
 
     # Hyperparameters optimisation variables

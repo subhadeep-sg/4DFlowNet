@@ -35,7 +35,7 @@ if __name__ == '__main__':
     output_dir = "/content/4DFlowNet/result"
     output_filename = 'example_result.h5'
     
-    model_path = "/content/4DFlowNet/models/4DFlowNet_20231119-1200/4DFlowNet-best.h5"
+    model_path = "/content/4DFlowNet/models/4DFlowNet_0/4DFlowNet-best.h5"
     # Params
     patch_size = 24
     res_increase = 2
